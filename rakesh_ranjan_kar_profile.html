@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rakesh Ranjan Kar — Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --navy-mid: #1a3260;
+    --navy-deep: #081326;
+    --gold: #b8985a;
+    --gold-light: #d4b87a;
+    --cream: #f5f0e8;
+    --slate: #8fa3c0;
+    --steel: #9fb5d2;
+    --white: #ffffff;
+    --text-dark: #1a1a2e;
+    --text-muted: #6b7a99;
+    --glass: rgba(255,255,255,0.07);
+    --glass-border: rgba(184,152,90,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(26,50,96,0.95) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 10% 50%, rgba(15,31,61,1) 0%, transparent 80%),
+      linear-gradient(135deg, #0a1628 0%, #0f1f3d 40%, #1a3260 100%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(184,152,90,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,152,90,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+  }
+
+  /* Animated corner ornaments */
+  .corner {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    opacity: 0.4;
+  }
+  .corner--tl { top: 24px; left: 24px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+  .corner--br { bottom: 24px; right: 24px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+
+  .hero-left {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    min-width: 0;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(184,152,90,0.15);
+    border: 1px solid var(--glass-border);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 32px;
+    width: fit-content;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 5.5vw, 72px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold-light);
+    font-weight: 400;
+  }
+
+  .hero-title {
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--slate);
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .hero-title span {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .divider-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 32px 0;
+    opacity: 0;
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    max-width: 420px;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 48px;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .stat-item { display: flex; flex-direction: column; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .hero-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+    max-width: 520px;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .proof-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 13px;
+    border: 1px solid rgba(184,152,90,0.22);
+    background: rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.78);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(12px);
+  }
+
+  .proof-mark {
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(184,152,90,0.16);
+    color: var(--gold-light);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  /* ── HERO RIGHT — PHOTO ── */
+  .hero-right {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 80px 60px 40px;
+    min-width: 0;
+  }
+
+  .photo-frame {
+    position: relative;
+    width: min(100%, 420px);
+    opacity: 0;
+    transform: scale(0.95) translateX(30px);
+  }
+
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--gold), transparent 40%, transparent 60%, var(--gold));
+    border-radius: 3px;
+    z-index: -1;
+  }
+
+  .photo-frame::after {
+    content: '';
+    position: absolute;
+    inset: 20px -20px -20px 20px;
+    background: rgba(184,152,90,0.12);
+    border-radius: 3px;
+    z-index: -2;
+    border: 1px solid rgba(184,152,90,0.2);
+  }
+
+  .profile-vector {
+    width: 100%;
+    aspect-ratio: 9 / 11.5;
+    display: block;
+    border-radius: 4px;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(15,31,61,0.95), rgba(26,50,96,0.88));
+    box-shadow: 0 28px 80px rgba(0,0,0,0.28);
+  }
+
+  .profile-vector use {
+    pointer-events: none;
+  }
+
+  .vector-note {
+    position: absolute;
+    top: 22px;
+    left: -18px;
+    max-width: 170px;
+    padding: 12px 14px;
+    border: 1px solid rgba(184,152,90,0.28);
+    background: rgba(8,19,38,0.78);
+    color: rgba(255,255,255,0.68);
+    font-size: 11px;
+    line-height: 1.55;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(12px);
+  }
+
+  .photo-accent {
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 140px;
+    height: 140px;
+    border: 1px solid rgba(184,152,90,0.3);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .photo-label {
+    position: absolute;
+    bottom: 20px;
+    right: -2px;
+    background: var(--navy);
+    border: 1px solid var(--glass-border);
+    padding: 10px 20px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ── SCROLL INDICATOR ── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 80px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    z-index: 3;
+    opacity: 0;
+    animation: fadeIn 1s 2.5s forwards;
+  }
+
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    animation: scroll-anim 2s ease-in-out infinite;
+    transform-origin: left;
+  }
+
+  @keyframes scroll-anim {
+    0%, 100% { transform: scaleX(1); opacity: 1; }
+    50% { transform: scaleX(0.4); opacity: 0.4; }
+  }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 100px 80px;
+    position: relative;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 60px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  /* ── ABOUT SECTION ── */
+  .about-section {
+    background: linear-gradient(180deg, var(--navy) 0%, #0a1628 100%);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .info-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 2px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+  }
+
+  .info-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(184,152,90,0.5);
+  }
+
+  .info-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, var(--gold), transparent);
+  }
+
+  .info-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--gold-light);
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 13.5px;
+    gap: 20px;
+  }
+
+  .info-row:last-child { border-bottom: none; }
+
+  .info-key {
+    color: var(--text-muted);
+    font-weight: 400;
+    min-width: 110px;
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .info-val {
+    color: var(--white);
+    font-weight: 400;
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* ── PROFESSIONAL ── */
+  .professional-section {
+    background: linear-gradient(180deg, #0a1628 0%, #0d1a36 100%);
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(180deg, var(--gold) 0%, rgba(184,152,90,0.1) 100%);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 48px;
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -44px; top: 8px;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(184,152,90,0.2);
+  }
+
+  .tl-org {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .tl-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .tl-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.75;
+  }
+
+  .tl-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .tl-tag {
+    background: rgba(184,152,90,0.1);
+    border: 1px solid rgba(184,152,90,0.25);
+    color: var(--gold-light);
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  /* ── IMPACT SECTION ── */
+  .impact-section {
+    background:
+      radial-gradient(circle at 15% 20%, rgba(184,152,90,0.12), transparent 28%),
+      linear-gradient(180deg, #0d1a36 0%, #0f1f3d 100%);
+  }
+
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .impact-card {
+    min-height: 260px;
+    padding: 28px;
+    background: rgba(255,255,255,0.055);
+    border: 1px solid var(--glass-border);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+  }
+
+  .impact-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(184,152,90,0.5);
+    background: rgba(184,152,90,0.08);
+  }
+
+  .impact-card::after {
+    content: '';
+    position: absolute;
+    inset: auto -20% -45% -20%;
+    height: 130px;
+    background: radial-gradient(ellipse at center, rgba(184,152,90,0.16), transparent 68%);
+  }
+
+  .impact-logo {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(184,152,90,0.3);
+    background: rgba(8,19,38,0.48);
+    border-radius: 18px;
+    margin-bottom: 22px;
+  }
+
+  .impact-logo svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .impact-kicker {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .impact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .impact-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.62);
+  }
+
+  /* ── SKILLS SECTION ── */
+  .skills-section {
+    background: linear-gradient(180deg, #0d1a36 0%, #0f1f3d 100%);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .skill-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 2px;
+    padding: 32px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .skill-card:hover {
+    background: rgba(184,152,90,0.1);
+    border-color: rgba(184,152,90,0.5);
+    transform: translateY(-6px);
+  }
+
+  .skill-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .skill-card:hover::after { opacity: 1; }
+
+  .skill-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .skill-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .skill-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── EDUCATION SECTION ── */
+  .education-section {
+    background: linear-gradient(180deg, #0f1f3d 0%, #0a1628 100%);
+  }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .edu-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .edu-card:hover {
+    border-color: rgba(184,152,90,0.5);
+    transform: translateY(-4px);
+  }
+
+  .edu-card.highlight {
+    border-color: rgba(184,152,90,0.4);
+    background: rgba(184,152,90,0.06);
+  }
+
+  .edu-degree {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--gold-light);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .edu-field {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  .edu-inst {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--slate);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .edu-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    background: rgba(184,152,90,0.15);
+    border: 1px solid rgba(184,152,90,0.3);
+    padding: 5px 14px;
+    border-radius: 100px;
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── PERSONAL SECTION ── */
+  .personal-section {
+    background: linear-gradient(180deg, #0a1628 0%, var(--navy) 100%);
+  }
+
+  .personal-hero {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .personal-photo-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .personal-vector {
+    width: 100%;
+    aspect-ratio: 3/4;
+    display: block;
+    border-radius: 3px;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(15,31,61,0.95), rgba(26,50,96,0.88));
+  }
+
+  .personal-photo-border {
+    position: absolute;
+    inset: -12px;
+    border: 1px solid rgba(184,152,90,0.25);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .personal-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .detail-tile {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 24px;
+    transition: all 0.3s ease;
+  }
+
+  .detail-tile:hover {
+    border-color: rgba(184,152,90,0.5);
+    background: rgba(184,152,90,0.06);
+  }
+
+  .detail-tile-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .detail-tile-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.3;
+  }
+
+  .detail-tile-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050e1f;
+    border-top: 1px solid var(--glass-border);
+    padding: 60px 80px;
+    text-align: center;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .footer-sub {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 40px;
+  }
+
+  .footer-divider {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 32px;
+  }
+
+  .footer-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── FLOATING STAR ── */
+  .star {
+    position: absolute;
+    width: 4px; height: 4px;
+    background: var(--gold);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: twinkle 3s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.4); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1100px) {
+    .hero-left { padding-left: 48px; }
+    .hero-right { padding-right: 48px; }
+    .impact-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .hero-right {
+      display: flex;
+      padding: 0 32px 84px;
+      justify-content: flex-start;
+    }
+    .photo-frame {
+      width: min(100%, 360px);
+      transform: scale(0.95) translateY(20px);
+    }
+    .vector-note { display: none; }
+    .hero-left { padding: 80px 32px; }
+    section { padding: 80px 32px; }
+    .about-grid, .edu-grid, .personal-hero,
+    .personal-details-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    footer { padding: 60px 32px; }
+    .scroll-hint { left: 32px; }
+  }
+
+  @media (max-width: 640px) {
+    .hero-left { padding: 64px 22px 40px; }
+    .hero-right { padding: 0 22px 70px; }
+    .hero-stats { gap: 22px; }
+    .stat-num { font-size: 30px; }
+    section { padding: 68px 22px; }
+    .section-title { margin-bottom: 36px; }
+    .skills-grid, .impact-grid { grid-template-columns: 1fr; }
+    .info-card, .edu-card, .detail-tile, .impact-card { padding: 24px; }
+    .info-row {
+      flex-direction: column;
+      gap: 6px;
+    }
+    .info-val { text-align: left; }
+    .photo-label { right: 12px; }
+    .scroll-hint { display: none; }
+    footer { padding: 52px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<svg aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute; overflow:hidden;">
+  <defs>
+    <symbol id="profile-vector-portrait" viewBox="0 0 360 460">
+      <defs>
+        <linearGradient id="portraitBg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#142a52"/>
+          <stop offset="0.52" stop-color="#0f1f3d"/>
+          <stop offset="1" stop-color="#071225"/>
+        </linearGradient>
+        <linearGradient id="portraitGold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f0d48d"/>
+          <stop offset="1" stop-color="#b8985a"/>
+        </linearGradient>
+        <linearGradient id="portraitSkin" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#c99066"/>
+          <stop offset="0.62" stop-color="#9b5f42"/>
+          <stop offset="1" stop-color="#74432f"/>
+        </linearGradient>
+        <clipPath id="portraitClip">
+          <rect x="0" y="0" width="360" height="460" rx="18"/>
+        </clipPath>
+      </defs>
+
+      <g clip-path="url(#portraitClip)">
+        <rect width="360" height="460" fill="url(#portraitBg)"/>
+        <path d="M36 390 C96 328 126 262 166 166 C192 104 244 62 330 42" fill="none" stroke="#b8985a" stroke-width="1" opacity="0.18"/>
+        <path d="M22 85 H338 M22 145 H338 M22 205 H338 M22 265 H338 M22 325 H338 M72 28 V430 M132 28 V430 M192 28 V430 M252 28 V430 M312 28 V430" stroke="#d4b87a" stroke-width="0.65" opacity="0.08"/>
+        <path d="M42 346 L118 346 L118 404 M68 404 L68 346 M168 368 L268 368 M208 330 L208 420" stroke="#9fb5d2" stroke-width="2" opacity="0.28" stroke-linecap="round"/>
+        <circle cx="292" cy="86" r="48" fill="#b8985a" opacity="0.09"/>
+        <circle cx="298" cy="88" r="34" fill="none" stroke="#d4b87a" stroke-width="1" opacity="0.2"/>
+
+        <path d="M86 432 C98 354 122 304 166 282 H194 C242 306 268 354 278 432 Z" fill="#081326"/>
+        <path d="M108 432 C117 362 138 320 170 302 L180 350 L190 302 C226 320 246 362 254 432 Z" fill="#152b52"/>
+        <path d="M145 315 L180 362 L215 315 L202 292 H158 Z" fill="#f5f0e8"/>
+        <path d="M158 292 H202 L198 328 C192 340 168 340 162 328 Z" fill="url(#portraitSkin)"/>
+        <path d="M124 180 C114 214 118 262 139 289 C159 316 202 319 224 291 C246 264 249 213 236 179 C223 146 140 146 124 180 Z" fill="url(#portraitSkin)"/>
+        <path d="M118 213 C104 211 99 226 105 242 C110 256 121 258 127 249" fill="#8b5038"/>
+        <path d="M238 213 C253 211 258 226 252 242 C247 256 236 258 231 249" fill="#8b5038"/>
+        <path d="M117 176 C126 124 168 103 211 113 C242 120 260 152 243 200 C233 181 218 166 194 162 C166 159 142 166 117 176 Z" fill="#111827"/>
+        <path d="M126 170 C153 132 213 128 240 174 C220 154 172 146 126 170 Z" fill="#273041" opacity="0.9"/>
+        <path d="M143 224 C152 219 162 219 171 224 M193 224 C203 219 214 219 222 225" stroke="#1a1a2e" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+        <path d="M178 226 C174 244 171 254 164 262 C173 268 184 268 193 262" fill="none" stroke="#74432f" stroke-width="3" stroke-linecap="round" opacity="0.62"/>
+        <path d="M158 282 C174 292 193 292 209 282" fill="none" stroke="#3b1f1b" stroke-width="3" stroke-linecap="round" opacity="0.72"/>
+        <path d="M146 318 L180 362 L154 372 L130 330 Z M214 318 L180 362 L206 372 L230 330 Z" fill="#0b1830"/>
+        <path d="M165 347 L180 362 L195 347 L206 432 H154 Z" fill="url(#portraitGold)" opacity="0.88"/>
+
+        <rect x="214" y="34" width="104" height="46" rx="23" fill="#081326" opacity="0.7" stroke="#b8985a" stroke-width="1"/>
+        <text x="266" y="62" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="22" font-weight="700" fill="#d4b87a">RRK</text>
+        <path d="M42 40 H106 M42 52 H82 M42 64 H122" stroke="#d4b87a" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+        <path d="M304 384 L318 398 L332 356" fill="none" stroke="#d4b87a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.78"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="corner corner--tl"></div>
+  <div class="corner corner--br"></div>
+
+  <!-- Decorative stars -->
+  <div class="star" style="top:15%; left:48%; animation-delay:0s;"></div>
+  <div class="star" style="top:75%; left:52%; animation-delay:1.2s; width:3px; height:3px;"></div>
+  <div class="star" style="top:40%; left:45%; animation-delay:0.6s; width:2px; height:2px;"></div>
+
+  <div class="hero-left">
+    <div class="badge" id="badge">
+      <div class="badge-dot"></div>
+      Professional &amp; Personal Profile
+    </div>
+
+    <h1 class="hero-name" id="hero-name">
+      Rakesh Ranjan<br><em>Kar</em>
+    </h1>
+
+    <p class="hero-title" id="hero-title">
+      Senior Civil Engineer &nbsp;·&nbsp;
+      <span>Tata Projects Ltd</span>
+    </p>
+
+    <div class="divider-line" id="divider"></div>
+
+    <p class="hero-tagline" id="hero-tagline">
+      Building India's future — from steel plants to silicon valleys, one foundation at a time.
+    </p>
+
+    <div class="hero-stats" id="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">5+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">M.Tech</span>
+        <span class="stat-label">Geotechnical Engg.</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">GATE</span>
+        <span class="stat-label">Qualified</span>
+      </div>
+    </div>
+
+    <div class="hero-proof" id="hero-proof" aria-label="Professional highlights">
+      <span class="proof-pill"><span class="proof-mark">T</span>Tata Projects</span>
+      <span class="proof-pill"><span class="proof-mark">D</span>Dholera Fab</span>
+      <span class="proof-pill"><span class="proof-mark">A</span>AM/NS Hazira</span>
+      <span class="proof-pill"><span class="proof-mark">G</span>GATE Civil</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="photo-frame" id="photo-frame">
+      <svg class="profile-vector" viewBox="0 0 360 460" role="img" aria-labelledby="heroProfileTitle heroProfileDesc">
+        <title id="heroProfileTitle">Vector profile illustration of Rakesh Ranjan Kar</title>
+        <desc id="heroProfileDesc">A self-contained vector portrait styled for a civil and structural engineering portfolio.</desc>
+        <use href="#profile-vector-portrait"></use>
+      </svg>
+      <div class="vector-note">Vector profile art inspired by SiluMamu.png and tuned for crisp portfolio rendering.</div>
+      <div class="photo-accent"></div>
+      <div class="photo-label">R. R. Kar</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll to explore
+  </div>
+</section>
+
+
+<!-- ══════════════════ ABOUT ══════════════════ -->
+<section class="about-section">
+  <div class="section-inner">
+    <div class="section-label reveal">About</div>
+    <h2 class="section-title reveal">Personal <em>Overview</em></h2>
+
+    <div class="about-grid">
+      <div>
+        <div class="info-card reveal">
+          <div class="info-card-title">Personal Details</div>
+          <div class="info-row">
+            <span class="info-key">Full Name</span>
+            <span class="info-val">Rakesh Ranjan Kar</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Date of Birth</span>
+            <span class="info-val">15 July 1997</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Time of Birth</span>
+            <span class="info-val">8:40 PM</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Place of Birth</span>
+            <span class="info-val">Banki Dampada,<br>Cuttack, Odisha</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Nationality</span>
+            <span class="info-val">Indian</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Religion</span>
+            <span class="info-val">Hindu</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="info-card reveal" style="margin-bottom: 24px;">
+          <div class="info-card-title">Current Engagement</div>
+          <div class="info-row">
+            <span class="info-key">Organisation</span>
+            <span class="info-val">Tata Projects Ltd</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Domain</span>
+            <span class="info-val">Civil &amp; Structural Engineering</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Active Project</span>
+            <span class="info-val">Semiconductor Plant,<br>Dholera, Gujarat</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Prior Projects</span>
+            <span class="info-val">HSM#2, Steel Plant;<br>AMNS Hazira</span>
+          </div>
+        </div>
+
+        <div class="info-card reveal">
+          <div class="info-card-title">Key Strengths</div>
+          <div class="info-row">
+            <span class="info-key">Design</span>
+            <span class="info-val">Civil &amp; Structural Design</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Foundation</span>
+            <span class="info-val">Pile Foundation &amp; Load Testing</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Execution</span>
+            <span class="info-val">Planning, Estimation &amp; Construction Management</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ PROFESSIONAL ══════════════════ -->
+<section class="professional-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Career</div>
+    <h2 class="section-title reveal">Professional <em>Journey</em></h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-org">Tata Projects Ltd · Current</div>
+        <div class="tl-role">Civil &amp; Structural Engineer</div>
+        <div class="tl-desc">
+          Spearheading civil and structural engineering activities at one of India's most ambitious greenfield semiconductor fabrication plants in Dholera Special Investment Region. Responsible for end-to-end design oversight, quantity estimation, and on-ground execution of all construction-related activities.
+        </div>
+        <div class="tl-tags">
+          <span class="tl-tag">Semiconductor Plant · Dholera</span>
+          <span class="tl-tag">Greenfield Infrastructure</span>
+          <span class="tl-tag">Structural Design</span>
+          <span class="tl-tag">Qty Estimation</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-org">Tata Projects Ltd · Steel Sector</div>
+        <div class="tl-role">Site Engineer — HSM#2, Steel Plant</div>
+        <div class="tl-desc">
+          Delivered critical civil engineering for Hot Strip Mill #2 (HSM#2) and ArcelorMittal Nippon Steel India (AMNS) Hazira — high-complexity industrial projects demanding precision in pile foundation design, structural execution, and multi-disciplinary coordination.
+        </div>
+        <div class="tl-tags">
+          <span class="tl-tag">HSM#2 Steel Plant</span>
+          <span class="tl-tag">AMNS Hazira</span>
+          <span class="tl-tag">Pile Foundation</span>
+          <span class="tl-tag">Load Testing</span>
+          <span class="tl-tag">Industrial Civil</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ IMPACT ══════════════════ -->
+<section class="impact-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Portfolio Strength</div>
+    <h2 class="section-title reveal">Project <em>Footprint</em></h2>
+
+    <div class="impact-grid">
+      <article class="impact-card reveal">
+        <div class="impact-logo" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M8 38H40M12 34V18L24 10L36 18V34" stroke="#d4b87a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19 34V24H29V34" stroke="#9fb5d2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="impact-kicker">Current Assignment</div>
+        <div class="impact-title">Semiconductor Plant, Dholera</div>
+        <p class="impact-desc">Civil and structural execution support for a next-generation greenfield fabrication facility in Gujarat.</p>
+      </article>
+
+      <article class="impact-card reveal">
+        <div class="impact-logo" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M9 37H39M13 37V16H20V37M28 37V12H35V37" stroke="#d4b87a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 22H28M20 30H28" stroke="#9fb5d2" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="impact-kicker">Industrial Exposure</div>
+        <div class="impact-title">Steel Plant &amp; AM/NS Hazira</div>
+        <p class="impact-desc">Hands-on contribution across heavy industrial civil work, structural coordination and site delivery.</p>
+      </article>
+
+      <article class="impact-card reveal">
+        <div class="impact-logo" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M14 10H34M18 10V38M24 10V38M30 10V38" stroke="#d4b87a" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M12 26C18 22 30 30 36 26M12 34C18 30 30 38 36 34" stroke="#9fb5d2" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="impact-kicker">Specialisation</div>
+        <div class="impact-title">Pile Foundation &amp; Load Testing</div>
+        <p class="impact-desc">M.Tech depth in geotechnical engineering with practical foundation design and field testing exposure.</p>
+      </article>
+
+      <article class="impact-card reveal">
+        <div class="impact-logo" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M14 36L24 12L34 36M18 28H30" stroke="#d4b87a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 40H38" stroke="#9fb5d2" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="impact-kicker">Recognition</div>
+        <div class="impact-title">GATE Qualified Civil Engineer</div>
+        <p class="impact-desc">National-level technical qualification backed by analytical fundamentals and disciplined engineering practice.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ SKILLS ══════════════════ -->
+<section class="skills-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Expertise</div>
+    <h2 class="section-title reveal">Core <em>Competencies</em></h2>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <span class="skill-icon">🏗️</span>
+        <div class="skill-name">Civil &amp; Structural Design</div>
+        <div class="skill-desc">End-to-end design of industrial civil structures, RCC and steel frameworks for large-scale infrastructure</div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">📐</span>
+        <div class="skill-name">AutoCAD</div>
+        <div class="skill-desc">Proficient in 2D/3D drafting, structural layout preparation and construction drawing generation</div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">🔩</span>
+        <div class="skill-name">STAAD.Pro</div>
+        <div class="skill-desc">Structural analysis and design software expertise for steel and concrete industrial structures</div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">📊</span>
+        <div class="skill-name">MS 365 Suite</div>
+        <div class="skill-desc">Advanced usage of Excel, Word and Project for estimation, documentation and project planning</div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">⚙️</span>
+        <div class="skill-name">Pile Foundation &amp; Load Testing</div>
+        <div class="skill-desc">M.Tech specialisation: deep expertise in geotechnical design, pile capacity analysis and field testing protocols</div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">📋</span>
+        <div class="skill-name">Planning &amp; Execution</div>
+        <div class="skill-desc">On-site construction management, scheduling, quantity estimation and inter-disciplinary coordination</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ EDUCATION ══════════════════ -->
+<section class="education-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Academics</div>
+    <h2 class="section-title reveal">Educational <em>Credentials</em></h2>
+
+    <div class="edu-grid">
+      <div class="edu-card highlight reveal">
+        <div class="edu-degree">M.Tech</div>
+        <div class="edu-field">Geotechnical Engineering<br><em style="font-size:12px; color: var(--gold); font-style:normal; letter-spacing:0.04em;">Specialisation in Pile Foundation Design &amp; Load Testing of Piles</em></div>
+        <div class="edu-inst">Post-Graduate Engineering</div>
+        <div class="edu-badge">⭐ GATE Qualified</div>
+      </div>
+
+      <div class="edu-card reveal">
+        <div class="edu-degree">B.Tech</div>
+        <div class="edu-field">Civil Engineering</div>
+        <div class="edu-inst">CET Bhubaneswar<br><span style="font-size:11px; opacity:0.6;">(Odisha University of Technology &amp; Research — OUTR)</span></div>
+        <div class="edu-badge">🎓 Graduate</div>
+      </div>
+
+      <div class="edu-card reveal" style="grid-column: 1 / -1; background: rgba(184,152,90,0.05); border-color: rgba(184,152,90,0.3);">
+        <div style="display:flex; align-items:center; gap: 24px; flex-wrap:wrap;">
+          <div style="flex:1; min-width:200px;">
+            <div class="edu-degree" style="font-size:22px;">GATE Qualified</div>
+            <div class="edu-field">Graduate Aptitude Test in Engineering — Civil Engineering</div>
+          </div>
+          <div style="flex:2; min-width:240px; font-size:13px; color:rgba(255,255,255,0.55); line-height:1.7;">
+            GATE qualification is a nationally recognised benchmark of technical excellence, reflecting deep mastery of engineering fundamentals and analytical thinking — positioning Rakesh among the top percentile of engineers in India.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ PERSONAL / MATRIMONY ══════════════════ -->
+<section class="personal-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Personal</div>
+    <h2 class="section-title reveal">Personal <em>Profile</em></h2>
+
+    <div class="personal-hero">
+      <div class="personal-photo-wrap reveal">
+        <svg class="personal-vector" viewBox="0 0 360 460" role="img" aria-labelledby="personalProfileTitle personalProfileDesc">
+          <title id="personalProfileTitle">Vector profile illustration of Rakesh Ranjan Kar</title>
+          <desc id="personalProfileDesc">Responsive vector portrait reused in the personal profile section.</desc>
+          <use href="#profile-vector-portrait"></use>
+        </svg>
+        <div class="personal-photo-border"></div>
+      </div>
+
+      <div>
+        <div class="personal-details-grid">
+          <div class="detail-tile reveal">
+            <div class="detail-tile-label">Date of Birth</div>
+            <div class="detail-tile-value">15 July 1997</div>
+            <div class="detail-tile-sub">8:40 PM</div>
+          </div>
+          <div class="detail-tile reveal">
+            <div class="detail-tile-label">Birthplace</div>
+            <div class="detail-tile-value">Banki Dampada</div>
+            <div class="detail-tile-sub">Cuttack, Odisha</div>
+          </div>
+          <div class="detail-tile reveal">
+            <div class="detail-tile-label">Education</div>
+            <div class="detail-tile-value">M.Tech + GATE</div>
+            <div class="detail-tile-sub">Geotechnical Engineering</div>
+          </div>
+          <div class="detail-tile reveal">
+            <div class="detail-tile-label">Occupation</div>
+            <div class="detail-tile-value">Civil Engineer</div>
+            <div class="detail-tile-sub">Tata Projects Ltd</div>
+          </div>
+          <div class="detail-tile reveal">
+            <div class="detail-tile-label">Current Location</div>
+            <div class="detail-tile-value">Dholera, Gujarat</div>
+            <div class="detail-tile-sub">On-site · Semiconductor Project</div>
+          </div>
+          <div class="detail-tile reveal">
+            <div class="detail-tile-label">Mother Tongue</div>
+            <div class="detail-tile-value">Odia</div>
+            <div class="detail-tile-sub">Also: Hindi · English</div>
+          </div>
+          <div class="detail-tile reveal" style="grid-column: 1 / -1;">
+            <div class="detail-tile-label">About</div>
+            <div style="font-size:14px; color:rgba(255,255,255,0.7); line-height:1.8; margin-top:8px;">
+              A grounded, ambitious professional from Odisha who has carved a distinguished career in large-scale industrial infrastructure with Tata Projects. Academically rigorous — M.Tech with GATE qualification — and practically accomplished, with hands-on delivery of landmark projects including a next-generation semiconductor fabrication plant. Family-oriented with strong roots in Odia culture and values.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div class="footer-name">Rakesh Ranjan Kar</div>
+  <div class="footer-sub">Civil &amp; Structural Engineer · Tata Projects Ltd</div>
+  <div class="footer-divider"></div>
+  <div class="footer-note">
+    M.Tech · Geotechnical Engineering &nbsp;|&nbsp; GATE Qualified &nbsp;|&nbsp; B.Tech · CET Bhubaneswar (OUTR)
+    <br><br>
+    <span style="font-size:11px; opacity:0.4; letter-spacing:0.06em;">PROFILE · 2025</span>
+  </div>
+</footer>
+
+
+<script>
+// ── GSAP Animations ──
+const revealWithoutGsap = () => {
+  const selectors = [
+    '#badge', '#hero-name', '#hero-title', '#divider', '#hero-tagline',
+    '#hero-stats', '#hero-proof', '#photo-frame', '.reveal',
+    '.timeline-item', '.skill-card', '.edu-card', '.detail-tile'
+  ];
+
+  document.querySelectorAll(selectors.join(',')).forEach((el) => {
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  });
+};
+
+if (window.gsap && window.ScrollTrigger) {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero entrance
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  tl.to('#badge',       { opacity: 1, y: 0, duration: 0.8, delay: 0.3 })
+    .to('#hero-name',   { opacity: 1, y: 0, duration: 1   }, '-=0.5')
+    .to('#hero-title',  { opacity: 1, y: 0, duration: 0.7 }, '-=0.7')
+    .to('#divider',     { opacity: 1, duration: 0.6        }, '-=0.4')
+    .to('#hero-tagline',{ opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
+    .to('#hero-stats',  { opacity: 1, y: 0, duration: 0.7 }, '-=0.5')
+    .to('#hero-proof',  { opacity: 1, y: 0, duration: 0.7 }, '-=0.4')
+    .to('#photo-frame', { opacity: 1, scale: 1, x: 0, y: 0, duration: 1.2, ease: 'power2.out' }, '-=1');
+
+  // Scroll reveals
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+        delay: (i % 3) * 0.1,
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 88%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  });
+
+  // Timeline items
+  document.querySelectorAll('.timeline-item').forEach((el, i) => {
+    gsap.to(el, {
+      opacity: 1, x: 0,
+      duration: 0.8,
+      delay: i * 0.15,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    });
+  });
+
+  // Skill cards stagger
+  gsap.utils.toArray('.skill-card').forEach((el, i) => {
+    gsap.to(el, {
+      opacity: 1, y: 0,
+      duration: 0.7,
+      delay: i * 0.1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 90%',
+        toggleActions: 'play none none none'
+      }
+    });
+  });
+
+  // Education & personal tiles stagger
+  gsap.utils.toArray('.edu-card, .detail-tile').forEach((el, i) => {
+    gsap.to(el, {
+      opacity: 1, y: 0,
+      duration: 0.7,
+      delay: i * 0.1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 90%',
+        toggleActions: 'play none none none'
+      }
+    });
+  });
+} else {
+  revealWithoutGsap();
+}
+</script>
+</body>
+</html>
